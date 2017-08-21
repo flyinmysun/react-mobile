@@ -1,6 +1,14 @@
 /**
  * Created by Administrator on 2017/8/13.
  */
+const pxtorem = require('postcss-pxtorem');
+const path = require('path');
+const webpack = require('webpack');
+
+const svgDirs = [
+    require.resolve('antd-mobile').replace(/warn\.js$/, ''),  // 1. 属于 antd-mobile 内置 svg 文件
+    // path.resolve(__dirname, 'src/my-project-svg-foler'),  // 2. 自己私人的 svg 存放目录
+];
 
 module.exports = {
     devtool: 'eval-source-map',
@@ -16,9 +24,9 @@ module.exports = {
         inline: true//实时刷新
     },
     resolve: {
-        mainFiles: ["index.web","index"],// 这里哦
-        modules: [path.resolve(__dirname, "src"), "node_modules"],
-        extensions: ['.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.ts', '.tsx', '.js', '.jsx', '.json'],
+        //modules: ['node_modules', path.join(__dirname, '../node_modules')],
+        modules: [path.resolve(__dirname, "app"), "node_modules"],
+        extensions: ['.web.js', '.js', '.json'],
     },
     module: {
         rules: [
@@ -28,7 +36,7 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.css$/,    //配置css
+                test:/\.(css|less)$/,    //配置css
                 use: [
                     {
                         loader: "style-loader"
@@ -40,11 +48,24 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(eot|svg|ttf|woff|woff2|png)\w*/,  //针对于fontawesome文件
+                test: /\.(eot|ttf|woff|woff2|png)\w*/,  //针对于fontawesome文件
                 loader: "file-loader",
             },
-
+            {
+                test: /\.(svg)$/i,
+                loader: 'svg-sprite-loader',
+                include: svgDirs,  // 把 svgDirs 路径下的所有 svg 文件交给 svg-sprite-loader 插件处理
+            },
         ]
-    }
+    },
+    /*plugins: {
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                postcss: function () {
+                    //return [precss, autoprefixer];
+                },
+            }
+        })
+    }*/
 
 }
