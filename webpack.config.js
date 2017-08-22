@@ -43,6 +43,9 @@ module.exports = {
                     }, {
                         loader: "css-loader"
                     }, {
+                        loader: 'postcss-loader'
+                    },
+                    {
                         loader: "less-loader"
                     }
                 ]
@@ -58,14 +61,22 @@ module.exports = {
             },
         ]
     },
-    /*plugins: {
+    plugins: [
         new webpack.LoaderOptionsPlugin({
             options: {
-                postcss: function () {
-                    //return [precss, autoprefixer];
-                },
+                /*postcss: function(){ //webpack新版必须用postcss.config.js
+                    return [
+                        require("autoprefixer")({
+                            browsers: ['ie>=8','>1% in CN']
+                        }),
+                        pxtorem({
+                            rootValue: 100,
+                            propWhiteList: [],
+                        }),
+                    ]
+                }*/
             }
         })
-    }*/
+    ]
 
 }
