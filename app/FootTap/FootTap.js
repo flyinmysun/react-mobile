@@ -65,11 +65,10 @@ export default class FootTap extends React.Component {
 
                 </TabBar.Item>
                 <TabBar.Item
-                    icon={<Icon type="koubei-o" size="md" />}
-                    selectedIcon={<Icon type="koubei" size="md" />}
+                    icon={<Icon type={require('../svgs/all.svg')} size="md" />}
+                    selectedIcon={<Icon type={require('../svgs/all.svg')} size="md" />}
                     title="持仓买入"
                     key="持仓买入"
-                    badge={'new'}
                     selected={this.state.selectedTab === 'redTab'}
                     onPress={() => {
                         this.setState({
@@ -106,8 +105,8 @@ export default class FootTap extends React.Component {
 
                 </TabBar.Item>
                 <TabBar.Item
-                    icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-                    selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
+                    icon={<Icon type={require('../svgs/set.svg')} size="md" />}
+                    selectedIcon={<Icon type={require('../svgs/set.svg')} size="md" />}
                     title="设置"
                     key="设置"
                     selected={this.state.selectedTab === 'yellowTab'}
