@@ -11,6 +11,10 @@ import HoldSell from "./holdSell/holdSell"
 import Loss from "./loss/loss"
 import './main.css'
 
+require("babel-core/register");
+require("babel-polyfill");
+require ('es6-promise').polyfill();
+require ('isomorphic-fetch');
 
 
 class App extends React.Component{
@@ -20,7 +24,7 @@ class App extends React.Component{
                 <Route path="/" component={RootView}>
                     <IndexRoute component={Buy}/>
                     <Route path="/buy" component={Buy}/>
-                    <Route path="/holdBuy" component={HoldBuy}/>
+                    <Route path="/hold-buy" component={HoldBuy}/>
                     <Route path="/holdSell" component={HoldSell}/>
                     <Route path="/loss" component={Loss}/>
                 </Route>

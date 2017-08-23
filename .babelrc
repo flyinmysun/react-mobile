@@ -1,6 +1,15 @@
 {
   "presets": ["react", "es2015","stage-0"],
-  "plugins": ["transform-runtime"],
-  "plugins": [["import", { "style": "css", "libraryName": "antd-mobile" }]],
+  "plugins": [
+    ["import", { "style": "css", "libraryName": "antd-mobile" }],
+    ["transform-runtime",
+      {
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true,
+        "moduleName": "babel-runtime"
+      }
+    ]
+  ],
   "comments": false
 }

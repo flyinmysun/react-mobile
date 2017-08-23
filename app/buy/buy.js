@@ -1,7 +1,6 @@
 import React from "react"
 import { NavBar, Icon ,List } from 'antd-mobile';
-require ('es6-promise').polyfill();
-require ('isomorphic-fetch');
+
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -12,9 +11,86 @@ export default class Buy extends React.Component{
         this.state = {
             disabled: false,
         }
+        this.asTest();
+    }
+
+    c1(callback){
+        let param = "1"
+        if(callback){
+            callback(param);
+        }
+    }
+
+    c2(p1,callback){
+        let param = "2"+p1;
+        if(callback){
+            callback(param);
+        }
+    }
+
+    c3(p2,callback){
+        let param = "3"+p2;
+        if(callback){
+            callback(param);
+        }
+    }
+
+    p1() {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                if (1 === 1) {
+                    resolve("成功");
+                } else {
+                    reject("失败");
+                }
+            }, 3000);
+        });
+    }
+
+    p2(data) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                if (1 === 1) {
+                    resolve("成功"+data);
+                } else {
+                    reject("失败");
+                }
+            }, 3000);
+        });
+    }
+
+    async asTest(){
+        let rs = await this.p1();
+        let rs2 = await this.p1(rs);
+        console.log(rs2);
     }
 
     componentDidMount() {
+
+        //this.asTest();
+
+        /*this.p1().then((data)=>{
+            return this.p2(data);
+        }).then(function(data){
+            alert(data);
+        }).catch(function(error){
+            alert(error);
+        })*/
+
+        /*this.c1((data)=>{
+            this.c2(data,(data)=>{
+                this.c3(data,(data)=>{
+                    alert(data);
+                });
+            })
+        })*/
+
+
+        try{
+
+        }catch (err){
+            alert("=======error");
+        }
 
         fetch("http://lms.moyior.com/ZFortuneCat-web/api/fund/getFundListByUser", {
             method: "POST",
@@ -40,9 +116,6 @@ export default class Buy extends React.Component{
             //console.log(response)
         });
     }
-
-
-
 
 
 

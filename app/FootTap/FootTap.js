@@ -1,4 +1,5 @@
 import React from "react"
+import {browserHistory} from 'react-router'
 import { TabBar, Icon } from 'antd-mobile';
 import "./FootTap.css"
 
@@ -7,7 +8,7 @@ export default class FootTap extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedTab: 'redTab',
+            selectedTab: 'blueTab',
             hidden: false,
         };
     }
@@ -51,6 +52,7 @@ export default class FootTap extends React.Component {
                         this.setState({
                             selectedTab: 'blueTab',
                         });
+                        browserHistory.push("/buy");
                     }}
                     data-seed="logId"
                 >
@@ -66,6 +68,7 @@ export default class FootTap extends React.Component {
                         this.setState({
                             selectedTab: 'redTab',
                         });
+                        browserHistory.push("/hold-buy");
                     }}
                     data-seed="logId1"
                 >
