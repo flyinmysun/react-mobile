@@ -6,6 +6,9 @@ import { Router, Route,IndexRoute, hashHistory,browserHistory } from 'react-rout
 
 import RootView from "./RootView/RootView"
 import Buy from "./buy/buy"
+import HoldBuy from "./holdBuy/holdBuy"
+import HoldSell from "./holdSell/holdSell"
+import Loss from "./loss/loss"
 import './main.css'
 
 
@@ -17,7 +20,9 @@ class App extends React.Component{
                 <Route path="/" component={RootView}>
                     <IndexRoute component={Buy}/>
                     <Route path="/buy" component={Buy}/>
-
+                    <Route path="/holdBuy" component={HoldBuy}/>
+                    <Route path="/holdSell" component={HoldSell}/>
+                    <Route path="/loss" component={Loss}/>
                 </Route>
             </Router>
         )

@@ -19,6 +19,9 @@
   "homepage": "https://github.com/flyinmysun/react-mobile#readme",
   "dependencies": {
     "antd-mobile": "^1.6.3",
+    "axios": "^0.16.2",
+    "es6-promise": "^4.1.1",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router": "^3.0.0"

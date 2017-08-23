@@ -41,18 +41,10 @@ export default class FootTap extends React.Component {
                 <TabBar.Item
                     title="买入市场"
                     key="买入市场"
-                    icon={<div style={{
-                        width: '0.44rem',
-                        height: '0.44rem',
-                        background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  0.42rem 0.42rem no-repeat' }}
-                    />
-                    }
-                    selectedIcon={<div style={{
-                        width: '0.44rem',
-                        height: '0.44rem',
-                        background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  0.42rem 0.42rem no-repeat' }}
-                    />
-                    }
+                    icon={<Icon type={require('../svgs/all.svg')} size="md" style={{ width: '0.44rem',
+                        height: '0.44rem',}} />}
+                    selectedIcon={<Icon type={require('../svgs/all.svg')} size="md" style={{ width: '0.44rem',
+                        height: '0.44rem',}} />}
                     selected={this.state.selectedTab === 'blueTab'}
 
                     onPress={() => {
@@ -65,8 +57,8 @@ export default class FootTap extends React.Component {
 
                 </TabBar.Item>
                 <TabBar.Item
-                    icon={<Icon type={require('../svgs/all.svg')} size="md" />}
-                    selectedIcon={<Icon type={require('../svgs/all.svg')} size="md" />}
+                    icon={<Icon type={require('../svgs/holdBuy.svg')} size="md" />}
+                    selectedIcon={<Icon type={require('../svgs/holdBuy.svg')} size="md" />}
                     title="持仓买入"
                     key="持仓买入"
                     selected={this.state.selectedTab === 'redTab'}
@@ -79,20 +71,10 @@ export default class FootTap extends React.Component {
                 >
                 </TabBar.Item>
                 <TabBar.Item
-                    icon={
-                        <div style={{
-                            width: '0.44rem',
-                            height: '0.44rem',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  0.42rem 0.42rem no-repeat' }}
-                        />
-                    }
-                    selectedIcon={
-                        <div style={{
-                            width: '0.44rem',
-                            height: '0.44rem',
-                            background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  0.42rem 0.42rem no-repeat' }}
-                        />
-                    }
+                    icon={<Icon type={require('../svgs/holdSell.svg')} size="md" style={{ width: '0.44rem',
+                        height: '0.44rem',}} />}
+                    selectedIcon={<Icon type={require('../svgs/holdSell.svg')} size="md" style={{ width: '0.44rem',
+                        height: '0.44rem',}} />}
                     title="持仓卖出"
                     key="持仓卖出"
                     selected={this.state.selectedTab === 'greenTab'}
