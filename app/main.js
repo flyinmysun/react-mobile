@@ -5,6 +5,7 @@ import { Router, Route,IndexRoute, hashHistory,browserHistory } from 'react-rout
 
 
 import RootView from "./RootView/RootView"
+import Login from "./User/Login"
 import Buy from "./buy/buy"
 import HoldBuy from "./holdBuy/holdBuy"
 import HoldSell from "./holdSell/holdSell"
@@ -22,7 +23,8 @@ class App extends React.Component{
         return(
             <Router history={browserHistory}>
                 <Route path="/" component={RootView}>
-                    <IndexRoute component={Buy}/>
+                    <IndexRoute component={Login}/>
+                    <Route path="/login" component={Login}/>
                     <Route path="/buy" component={Buy}/>
                     <Route path="/hold-buy" component={HoldBuy}/>
                     <Route path="/holdSell" component={HoldSell}/>

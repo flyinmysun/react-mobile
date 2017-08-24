@@ -11,10 +11,10 @@ export default class Buy extends React.Component{
         this.state = {
             disabled: false,
         }
-        //this.asTest();
+        this.asTest();
     }
 
-    /*c1(callback){
+    c1(callback){
         let param = "1"
         if(callback){
             callback(param);
@@ -63,7 +63,7 @@ export default class Buy extends React.Component{
         let rs = await this.p1();
         let rs2 = await this.p1(rs);
         console.log(rs2);
-    }*/
+    }
 
     componentDidMount() {
 
@@ -86,16 +86,15 @@ export default class Buy extends React.Component{
         })*/
 
 
-        /*try{
+        try{
 
         }catch (err){
             alert("=======error");
-        }*/
+        }
 
         fetch("http://lms.moyior.com/ZFortuneCat-web/api/fund/getFundListByUser", {
             method: "POST",
-            mode: "cors",//允许跨域
-            credentials: "include",//允许传cookies
+            mode: "cors",
             headers: {
                 //'Accept': 'application/json',
                 "content-type" : 'application/json',
@@ -121,7 +120,7 @@ export default class Buy extends React.Component{
 
 
     handleLongPress = (e) => {
-        //console.log('longpress toggled', e);
+        console.log('longpress toggled', e);
     }
 
     render(){

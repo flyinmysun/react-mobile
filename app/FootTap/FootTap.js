@@ -13,6 +13,25 @@ export default class FootTap extends React.Component {
         };
     }
 
+    componentDidMount(){
+        this.selectTab();
+        browserHistory.listen((e) => {  //切换路由时触发
+            this.selectTab();
+        })
+    }
+
+    selectTab = () =>{
+        let curLocation = browserHistory.getCurrentLocation()
+        if(curLocation.pathname == "/login"){
+            this.setState({...this.state,hidden: true});
+        }else if(curLocation.pathname == "/buy"){
+            this.setState({...this.state,hidden: false,selectedTab: 'blueTab',});
+        }
+        else if(curLocation.pathname == "/hold-buy"){
+            this.setState({...this.state,hidden: false,selectedTab: 'redTab',});
+        }
+    }
+
     /*renderContent(pageText) {
         return (
             <div style={{ backgroundColor: 'white', height: '100%', textAlign: 'center' }}>
@@ -49,9 +68,6 @@ export default class FootTap extends React.Component {
                     selected={this.state.selectedTab === 'blueTab'}
 
                     onPress={() => {
-                        this.setState({
-                            selectedTab: 'blueTab',
-                        });
                         browserHistory.push("/buy");
                     }}
                     data-seed="logId"
@@ -65,10 +81,9 @@ export default class FootTap extends React.Component {
                     key="持仓买入"
                     selected={this.state.selectedTab === 'redTab'}
                     onPress={() => {
-                        this.setState({
-                            selectedTab: 'redTab',
+                        this.setState({...this.state, selectedTab: 'redTab',},function(){
+                            browserHistory.push("/hold-buy");
                         });
-                        browserHistory.push("/hold-buy");
                     }}
                     data-seed="logId1"
                 >

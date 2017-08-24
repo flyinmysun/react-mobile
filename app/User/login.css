@@ -1,0 +1,13 @@
+*{padding: 0;margin: 0;border: 0}
+.clearfix:after { content:"."; display:block; height:0; visibility:hidden; clear:both; }
+div{
+    box-sizing: border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+}
+.imgBox{width: 100%;background-color: red;overflow: hidden;}
+.imgBox img{width: 100%;height:100%;display:block}
+.tap div{width: 50%;float: left;text-align: center;font-size: 36px;line-height: 100px;}
+.tapActive{background-color: #108ee9;color: #ffffff}
+.inputImgPerson,.inputImgPassword{height: 44px;width: 44px;background-size: cover;}
+.loginBtn{margin-top: 60px;}
