@@ -10,8 +10,8 @@ export default class Buy extends React.Component{
         super(props);
         this.state = {
             disabled: false,
+            res:[],
         }
-        //this.asTest();
     }
 
     /*c1(callback){
@@ -97,7 +97,6 @@ export default class Buy extends React.Component{
             mode: "cors",//允许跨域
             credentials: "include",//允许传cookies
             headers: {
-                //'Accept': 'application/json',
                 "content-type" : 'application/json',
 
             },
@@ -106,10 +105,14 @@ export default class Buy extends React.Component{
                 "pageSize":10,
                 "orders":{"valueTime":true}
             })
-        }).then(function(response) {
+        }).then((response)=> {
             if (response.ok) {
-                response.json().then(function (data) {
-                    console.log(data);
+                response.json().then((data)=> {
+                    if(data && data.success==true){
+                        let res = data.result.result;
+                        console.log(res);
+                        this.setState({...this.state,res:res});
+                    }
                 });
             } else {
                 console.log('请求失败，状态码为', response.status);
@@ -135,18 +138,28 @@ export default class Buy extends React.Component{
                             <Icon key="1" type="ellipsis" />,
                         ]}
                 >可买入基金列表</NavBar>
+                <List className="my-list" style={{paddingBottom:"100px"}}>
+                    {
+                        this.state.res.map((item,index)=>{
+                            return(
+                                <Item key={index} arrow="horizontal" thumb={<Icon type={require('../svgs/fundIcon.svg')}/>} multipleLine
+                                      style={{borderBottom:"1px soild red"}} onClick={() => {}}>
+                                      {item.name}
+                                      <Brief>基金代码：{item.code}</Brief>
+                                </Item>
 
+                            )
+                        })
+                    }
 
-                <List className="my-list">
-                    <Item
-                        arrow="horizontal"
-                        thumb={<Icon type={require('../svgs/fundIcon.svg')}/>}
-                        multipleLine
-                        onClick={() => {}}
-                    >
-                        长河国际基金 <Brief>基金代码：253522</Brief>
-                    </Item>
                 </List>
+
+
+
+
+
+
+
 
 
 

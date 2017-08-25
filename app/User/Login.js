@@ -6,6 +6,8 @@ import loginP1 from '../imgs/login.png';
 import "./login.css"
 import {browserHistory} from 'react-router'
 import { List, InputItem,Icon,Button} from 'antd-mobile';
+import Request from "../utils/util"
+//console.log(Request)
 
 export default class Login extends React.Component{
     constructor(){
@@ -17,9 +19,13 @@ export default class Login extends React.Component{
         }
     }
     signIn(){
-        //console.log(this.state.userName);
-        //console.log(this.state.password);
-        fetch("http://lms.moyior.com/ZFortuneCat-web/api/user/login", {
+        let param ={
+            "username":this.state.userName,
+            "password":this.state.password
+        }
+        //console.log()
+        Request("http://lms.moyior.com/ZFortuneCat-web/api/user/login",param,this.successFn)
+        /*fetch("http://lms.moyior.com/ZFortuneCat-web/api/user/login", {
             method: "POST",
             mode: "cors",
             credentials: "include",//允许传cookies
@@ -34,16 +40,24 @@ export default class Login extends React.Component{
         }).then(function(response) {
             if (response.ok) {
                 response.json().then(function (data) {
-                    browserHistory.push("/buy");
+                    if(data &&data.success==true){
+                        //console.log(data);
+                        browserHistory.push("/buy");
+                    }
+
                 });
             } else {
                 console.log('请求失败，状态码为', response.status);
             }
             //console.log(response)
-        });
-
+        });*/
 
     }
+    successFn(){
+        console.log("封装成功，等待调用")
+        browserHistory.push("/buy");
+    }
+
     render(){
         return(
             <div>

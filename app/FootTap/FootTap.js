@@ -21,7 +21,8 @@ export default class FootTap extends React.Component {
     }
 
     selectTab = () =>{
-        let curLocation = browserHistory.getCurrentLocation()
+        let curLocation = browserHistory.getCurrentLocation()  //得到当前的浏览器的url路由名字
+        //console.log(curLocation)
         if(curLocation.pathname == "/login"){
             this.setState({...this.state,hidden: true});
         }else if(curLocation.pathname == "/buy"){
@@ -29,6 +30,12 @@ export default class FootTap extends React.Component {
         }
         else if(curLocation.pathname == "/hold-buy"){
             this.setState({...this.state,hidden: false,selectedTab: 'redTab',});
+        }
+        else if(curLocation.pathname == "/hold-sell"){
+            this.setState({...this.state,hidden: false,selectedTab: 'greenTab',});
+        }
+        else if(curLocation.pathname == "/loss"){
+            this.setState({...this.state,hidden: false,selectedTab: 'yellowTab',});
         }
     }
 
@@ -81,9 +88,7 @@ export default class FootTap extends React.Component {
                     key="持仓买入"
                     selected={this.state.selectedTab === 'redTab'}
                     onPress={() => {
-                        this.setState({...this.state, selectedTab: 'redTab',},function(){
-                            browserHistory.push("/hold-buy");
-                        });
+                        browserHistory.push("/hold-buy");
                     }}
                     data-seed="logId1"
                 >
@@ -97,9 +102,7 @@ export default class FootTap extends React.Component {
                     key="持仓卖出"
                     selected={this.state.selectedTab === 'greenTab'}
                     onPress={() => {
-                        this.setState({
-                            selectedTab: 'greenTab',
-                        });
+                        browserHistory.push("/hold-sell");
                     }}
                 >
 
@@ -111,9 +114,10 @@ export default class FootTap extends React.Component {
                     key="设置"
                     selected={this.state.selectedTab === 'yellowTab'}
                     onPress={() => {
-                        this.setState({
+                        /*this.setState({
                             selectedTab: 'yellowTab',
-                        });
+                        });*/
+                        browserHistory.push("/loss");
                     }}
                 >
                 </TabBar.Item>

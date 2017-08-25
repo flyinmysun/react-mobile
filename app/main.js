@@ -27,7 +27,7 @@ class App extends React.Component{
                     <Route path="/login" component={Login}/>
                     <Route path="/buy" component={Buy}/>
                     <Route path="/hold-buy" component={HoldBuy}/>
-                    <Route path="/holdSell" component={HoldSell}/>
+                    <Route path="/hold-sell" component={HoldSell}/>
                     <Route path="/loss" component={Loss}/>
                 </Route>
             </Router>
