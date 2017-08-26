@@ -92,6 +92,7 @@ export default class Buy extends React.Component{
             alert("=======error");
         }*/
 
+
         fetch("http://lms.moyior.com/ZFortuneCat-web/api/fund/getFundListByUser", {
             method: "POST",
             mode: "cors",//允许跨域
