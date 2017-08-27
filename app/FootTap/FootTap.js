@@ -21,7 +21,7 @@ export default class FootTap extends React.Component {
     }
 
     selectTab = () =>{
-        let curLocation = browserHistory.getCurrentLocation()  //得到当前的浏览器的url路由名字
+        let curLocation = browserHistory.getCurrentLocation();  //得到当前的浏览器的url路由名字
         //console.log(curLocation)
         if(curLocation.pathname == "/login"){
             this.setState({...this.state,hidden: true});

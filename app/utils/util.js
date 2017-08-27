@@ -12,7 +12,10 @@ class util{
             if (response.ok) {
                 response.json().then((data)=>{
                     if(data &&data.success==true){
-                        successCallBack()
+                        let res = data.result.result;
+                        successCallBack(res)
+                    }else{
+                        console.log(data.errorMsg)
                     }
                 });
             } else {

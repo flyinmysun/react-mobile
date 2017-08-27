@@ -1,5 +1,7 @@
 import React from "react"
 import { NavBar, Icon ,List } from 'antd-mobile';
+import util from "../utils/util"
+import { browserHistory } from 'react-router';
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -91,9 +93,14 @@ export default class Buy extends React.Component{
         }catch (err){
             alert("=======error");
         }*/
+        let param={
+            "pageNo":1,
+            "pageSize":10,
+            "orders":{"valueTime":true}
+        }
 
-
-        fetch("http://lms.moyior.com/ZFortuneCat-web/api/fund/getFundListByUser", {
+        util.requestData("http://lms.moyior.com/ZFortuneCat-web/api/fund/getFundListByUser",param,this.successFn)
+        /*fetch("http://lms.moyior.com/ZFortuneCat-web/api/fund/getFundListByUser", {
             method: "POST",
             mode: "cors",//允许跨域
             credentials: "include",//允许传cookies
@@ -119,13 +126,19 @@ export default class Buy extends React.Component{
                 console.log('请求失败，状态码为', response.status);
             }
             //console.log(response)
-        });
+        });*/
     }
 
+    successFn =(res)=>{
+        //console.log(res);
+        this.setState({...this.state,res:res});
+    }
 
-
-    handleLongPress = (e) => {
+    changeDetailPage = (id) => {
         //console.log('longpress toggled', e);
+        //browserHistory.push("/buy-detail?fundId="+1);
+        //console.log(id)
+        browserHistory.push(`/buy-detail?id=${id}`);   //使用~    ~来进行字符拼接，${}  里面放入变量
     }
 
     render(){
@@ -144,7 +157,9 @@ export default class Buy extends React.Component{
                         this.state.res.map((item,index)=>{
                             return(
                                 <Item key={index} arrow="horizontal" thumb={<Icon type={require('../svgs/fundIcon.svg')}/>} multipleLine
-                                      style={{borderBottom:"1px soild red"}} onClick={() => {}}>
+                                      style={{borderBottom:"1px soild red"}} onClick={(e) => {
+                                          this.changeDetailPage(item.id)
+                                }}>
                                       {item.name}
                                       <Brief>基金代码：{item.code}</Brief>
                                 </Item>
