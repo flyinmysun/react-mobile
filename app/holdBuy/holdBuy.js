@@ -2,8 +2,10 @@ import React from "react"
 import {browserHistory} from "react-router"
 import {Icon,NavBar,SearchBar,WhiteSpace,List} from "antd-mobile"
 import service from "../Service/Service"
+import HoldBuyListItem from './components/HoldBuyListItem'
 const Item = List.Item;
 const Brief = Item.Brief;
+
 
 
 export default class HoldBuy extends React.Component{
@@ -13,6 +15,7 @@ export default class HoldBuy extends React.Component{
             res:[]
         }
     }
+
     componentDidMount(){
         let param={
             "key":"",
@@ -38,7 +41,6 @@ export default class HoldBuy extends React.Component{
     successFn=(res)=>{
         console.log(res)
         this.setState({...this.state,res:res})
-
     }
 
 
@@ -55,19 +57,11 @@ export default class HoldBuy extends React.Component{
                                 <Item key={index} extra={<div style={{fontSize:".28rem"}}>持有天数 <span style={{color:"#108ee9"}}>{item.curDays}</span>天</div>} multipleLine align="top" wrap onClick={()=>{
                                     browserHistory.push(`/hold-buy-detail?id=${item.id}`)
                                 }}>
-                                    <p style={{color:"#108ee9"}}>{item.fundName}</p>
-                                    <p style={{fontSize:".28rem"}}>基金代码：{item.fundCode}</p>
-                                    <p style={{fontSize:".24rem"}}>
-                                        <span style={{marginRight:"0.3rem"}}>总利润(元)：{item.profit}</span>
-                                        <span>日利润(元)：{item.dayProfit}</span>
-                                    </p>
+                                    <HoldBuyListItem item={item}/>
                                 </Item>
                             )
                         })
                     }
-
-
-
                 </List>
             </div>
         )

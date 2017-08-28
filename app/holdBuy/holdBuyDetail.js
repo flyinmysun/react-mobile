@@ -50,33 +50,37 @@ export default class HoldBuyDetail extends React.Component{
         }
         this.setState({...this.state,buyInfo:buyInfo})
     }
+
+    confirmDelete(id){
+        Modal.alert("提示","确定要删除此条基金买入？", [
+            { text: '取消', onPress: () =>{ } },
+            { text: '确定', onPress: () => {
+                this.delete(id);
+            }},
+        ]);
+    }
     delete=(id)=>{
-        let msg =confirm("确定要删除此条基金买入？")
-        if(msg == true){
-            let param ={id:id}
-            service.deleteBuy(param,this.delSuccess)
-        }
-
-
+        let param ={id:id}
+        service.deleteBuy(param,this.delSuccess)
     }
 
     delSuccess=(res)=>{
         console.log("删除成功");
         browserHistory.push("/hold-buy")
-
     }
 
 
     render(){
+        const {buyInfo} = this.state;
         return(
             <div style={{paddingBottom:"2rem"}}>
                 <NavBar mode="dark" onLeftClick={() =>{
                     browserHistory.push("/hold-buy");
                 }} rightContent={[<Icon key="1" type="ellipsis" />,]}>买入列表详情</NavBar>
                 <List className="my-list" renderHeader="买入该基金列表详情" style={{fontSize:".32rem",color:"red"}}>
-                    <Item extra={this.state.buyInfo.money} >买入金额(元)</Item>
-                    <Item extra={this.state.buyInfo.curMoney} >当前金额(元)</Item>
-                    <Item extra={this.state.buyInfo.sellSurplus} >卖出金额(元)</Item>
+                    <Item extra={buyInfo.money} >买入金额(元)</Item>
+                    <Item extra={buyInfo.curMoney} >当前金额(元)</Item>
+                    <Item extra={buyInfo.sellSurplus} >卖出金额(元)</Item>
                     <Item extra={this.state.buyInfo.profit} >总利润(元)</Item>
                     <Item extra={this.state.buyInfo.profitPercent } >总涨幅</Item>
                     <Item extra={this.state.buyInfo.dayProfit} >平均日利润(元)</Item>
@@ -104,7 +108,7 @@ export default class HoldBuyDetail extends React.Component{
                         browserHistory.push("/hold-buy-modify")
                     }}>修改</Button>
                     <Button type="primary" inline size="small" style={{width:"30%",marginRight:"2.5%"}} onClick={()=>{
-                        this.delete(this.state.buyInfo.id);
+                        this.confirmDelete(this.state.buyInfo.id);
                     }}>删除</Button>
                     <Button type="primary" inline size="small" style={{width:"30%"}}>卖出该基金</Button>
                 </div>
