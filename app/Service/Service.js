@@ -11,6 +11,14 @@ class Service{
         let url = "http://lms.moyior.com/ZFortuneCat-web/api/buy/getBuyList";
         util.requestData(url,param,callback)
     }
+    login(param,callback){
+        let url = "http://lms.moyior.com/ZFortuneCat-web/api/user/login";
+        util.requestData(url,param,callback)
+    }
+    deleteBuy(param,callback){
+        let url = "http://lms.moyior.com/ZFortuneCat-web/api/buy/deleteBuy"
+        util.requestData(url,param,callback)
+    }
 }
 
 export default new Service();

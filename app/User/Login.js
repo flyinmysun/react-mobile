@@ -6,7 +6,8 @@ import loginP1 from '../imgs/login.png';
 import "./login.css"
 import {browserHistory} from 'react-router'
 import { List, InputItem,Icon,Button} from 'antd-mobile';
-import util from "../utils/util"   //将共用方法引入
+//import util from "../utils/util"   //将共用方法引入
+import service from "../Service/Service"
 //console.log(util)
 
 export default class Login extends React.Component{
@@ -24,10 +25,9 @@ export default class Login extends React.Component{
             "password":this.state.password
         }
         //console.log()
-        //调用共用方法里面的requestData的方法
-        util.requestData("http://lms.moyior.com/ZFortuneCat-web/api/user/login",param,this.successFn)
+        //调用后台方法里面的login的方法
+        service.login(param,this.successFn)
 
-        //Request("http://lms.moyior.com/ZFortuneCat-web/api/user/login",param,this.successFn)
         /*fetch("http://lms.moyior.com/ZFortuneCat-web/api/user/login", {
             method: "POST",
             mode: "cors",

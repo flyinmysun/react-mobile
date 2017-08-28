@@ -44,7 +44,7 @@ export default class HoldBuy extends React.Component{
 
     render(){
         return(
-            <div>
+            <div style={{paddingBottom:"2rem"}}>
                 <NavBar mode="dark" rightContent={[<Icon key="1" type="ellipsis" />,]}>持仓买入列表</NavBar>
                 <SearchBar placeholder="搜索" maxLength={8} />
                 <WhiteSpace />

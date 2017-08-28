@@ -1,7 +1,8 @@
 import React from "react"
 import {browserHistory} from "react-router"
-import {Icon,NavBar,List,Flex,Button} from "antd-mobile"
+import {Icon,NavBar,List,Button,Modal,WhiteSpace,WingBlank,Toast} from "antd-mobile"
 import service from "../Service/Service"
+import moment from "moment"
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -49,12 +50,29 @@ export default class HoldBuyDetail extends React.Component{
         }
         this.setState({...this.state,buyInfo:buyInfo})
     }
+    delete=(id)=>{
+        let msg =confirm("确定要删除此条基金买入？")
+        if(msg == true){
+            let param ={id:id}
+            service.deleteBuy(param,this.delSuccess)
+        }
+
+
+    }
+
+    delSuccess=(res)=>{
+        console.log("删除成功");
+        browserHistory.push("/hold-buy")
+
+    }
 
 
     render(){
         return(
             <div style={{paddingBottom:"2rem"}}>
-                <NavBar mode="dark" rightContent={[<Icon key="1" type="ellipsis" />,]}>买入列表详情</NavBar>
+                <NavBar mode="dark" onLeftClick={() =>{
+                    browserHistory.push("/hold-buy");
+                }} rightContent={[<Icon key="1" type="ellipsis" />,]}>买入列表详情</NavBar>
                 <List className="my-list" renderHeader="买入该基金列表详情" style={{fontSize:".32rem",color:"red"}}>
                     <Item extra={this.state.buyInfo.money} >买入金额(元)</Item>
                     <Item extra={this.state.buyInfo.curMoney} >当前金额(元)</Item>
@@ -63,11 +81,11 @@ export default class HoldBuyDetail extends React.Component{
                     <Item extra={this.state.buyInfo.profitPercent } >总涨幅</Item>
                     <Item extra={this.state.buyInfo.dayProfit} >平均日利润(元)</Item>
                     <Item extra={this.state.buyInfo.dayProfitPercent } >平均日涨幅</Item>
-                    <Item extra={this.state.buyInfo.buyTime } >买入时间</Item>
+                    <Item extra={moment(this.state.buyInfo.buyTime).format("YYYY-MM-DD HH-mm-ss")} >买入时间</Item>
                     <Item extra={this.state.buyInfo.buyUnitPrice } >买入单价(元)</Item>
                     <Item extra={this.state.buyInfo.share } >买入份额</Item>
                     <Item extra={this.state.buyInfo.buyCost } >买入费用(元)</Item>
-                    <Item extra={this.state.buyInfo.curUnitPriceDate} >计算日期</Item>
+                    <Item extra={moment(this.state.buyInfo.curUnitPriceDate).format("YYYY-MM-DD HH-mm-ss")} >计算日期</Item>
                     <Item extra={this.state.buyInfo.curDays } >持有天数</Item>
                     <Item extra={this.state.buyInfo.curUnitPrice } >当前单价(元)</Item>
                     <Item extra={this.state.buyInfo.curSellExchangeRate } >卖出费率(元)</Item>
@@ -78,9 +96,16 @@ export default class HoldBuyDetail extends React.Component{
                 <div style={{ marginBottom: '0.16rem',marginTop:"0.3rem"}} className="btnWrap">
                     <Button type="primary" inline size="small" style={{width:"30%",marginRight:"2.5%",marginLeft:"1.25%"}} onClick={()=>{
                         console.log(JSON.stringify(this.state.buyInfo));
-                        //browserHistory.push(`/hold-buy-modify?id=${this.state.buyInfo}`)
+                        let itemStr = JSON.stringify(this.state.buyInfo)  //将对象转成Json字符
+                        //console.log(typeof itemStr)   字符
+                        window.localStorage.setItem("itemInfo",itemStr)   //以键值对的形式进行存储
+                        //let a =JSON.parse(window.localStorage.getItem("itemInfo"));
+                        //console.log(a)
+                        browserHistory.push("/hold-buy-modify")
                     }}>修改</Button>
-                    <Button type="primary" inline size="small" style={{width:"30%",marginRight:"2.5%"}}>删除</Button>
+                    <Button type="primary" inline size="small" style={{width:"30%",marginRight:"2.5%"}} onClick={()=>{
+                        this.delete(this.state.buyInfo.id);
+                    }}>删除</Button>
                     <Button type="primary" inline size="small" style={{width:"30%"}}>卖出该基金</Button>
                 </div>
             </div>
